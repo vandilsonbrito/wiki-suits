@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+.personagem a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    color: rgb(160, 160, 248);
+}
+.personagem p {
+    margin: 15px 0 15px;
+}
+.personagem span {
+    font-size: 1.5rem;
+    color: #ff0000;
+}
+.personagem h6 {
+    font-size: 1.2rem;
+    color: #ff0000;
+}
+.personagem ul {
+    list-style-type: disc;
+    margin: 15px 0 15px 50px;
+}
