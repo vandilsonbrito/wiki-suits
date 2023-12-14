@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import { motion } from 'framer-motion';
-import { Link } from "react-router-dom";
 
 export default function Personagens() {
     
@@ -32,31 +31,28 @@ export default function Personagens() {
         getDataCharacter()
     }, [slug])
 
-    const paragraphs = character?.description?.map((paragraph, index) => (
-        <p key={index}>{paragraph}</p>
-    ));
 
-  return (
-    <div className="w-full h-full bg-black personagem" >
-        <motion.div
-        initial={{opacity: 0.5}}
-        animate={{opacity: 1}}
-        exit={{opacity: 0}}
-        
-        >
-            {console.log((character.characterName)?.replace(' ', '_'))}
-            {character ? (
-                <div className="w-full h-full min-h-screen text-white p-7 md:p-20 flex flex-col items-center gap-7">
-                    <img className='w-[90px] h-[90px] object-cover rounded-xl mx-auto' src={`https://raw.githubusercontent.com/vandilsonbrito/wiki-suits/main/src/API/public/characters/${(character.characterName)?.replace(' ', '_')}.webp`} alt={`${character.characterName} Picture`}/>
-                    <h2 className="text-2xl mb-8">{character.characterName}</h2>
-                    {paragraphs}
-                </div>
-            ) : (
-                <p>Carregando...</p>
-            )}
-        
-            <Footer/>
-        </motion.div>
-    </div>
+    return (
+        <div className="w-full h-full bg-black personagem" >
+            <motion.div
+            initial={{opacity: 0.5}}
+            animate={{opacity: 1}}
+            exit={{opacity: 0}}
+            
+            >
+                
+                {character ? (
+                    <div className="w-full h-full min-h-screen text-white p-7 md:p-20 flex flex-col items-center gap-7">
+                        <img className='w-[90px] h-[90px] object-cover rounded-xl mx-auto' src={`https://raw.githubusercontent.com/vandilsonbrito/wiki-suits/main/src/API/public/characters/${(character.characterName)?.replace(' ', '_')}.webp`} alt={`${character.characterName} Picture`}/>
+                        <h2 className="text-2xl mb-8">{character.characterName}</h2>
+                        <div dangerouslySetInnerHTML={{ __html: character?.description?.join('') }} />
+                    </div>
+                ) : (
+                    <p>Carregando...</p>
+                )}
+            
+                <Footer/>
+            </motion.div>
+        </div>
   )
 }
