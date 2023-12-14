@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import { motion } from 'framer-motion';
+import { Link } from "react-router-dom";
 
 export default function Personagens() {
     
