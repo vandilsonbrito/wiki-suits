@@ -27,13 +27,11 @@ export default function Home() {
   // Efeito para salvar scrollY no sessionStorage quando a página é desmontada
   useEffect(() => {
     localStorage.setItem("scrollPos", JSON.stringify(scrollY));
-    console.log("Atualizou...." + scrollY.toString())
   }, [scrollY]);
 
   // Efeito para restaurar o valor de scrollY ao retornar à página
   useEffect(() => {
     const scrollYStorage = localStorage.getItem('scrollPos');
-    console.log(scrollYStorage);
     setScrollY(scrollYStorage ? parseInt(scrollYStorage, 10) : 0);
 
     window.scrollTo(0, scrollYStorage ? parseInt(scrollYStorage, 10) : 0);

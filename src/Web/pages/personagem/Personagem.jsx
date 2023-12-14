@@ -10,12 +10,28 @@ export default function Personagens() {
     
 
     const getDataCharacter = async () => {
-        try {
+        /* try {
             const res = await fetch(`http://localhost:3001/api/characters/${slug}`);
             const data = await res.json();
             setCharacter(data);
         }
-        catch(e) { console.log(e) }
+        catch(e) { console.log(e) } */
+        
+        const charactersURL = "https://raw.githubusercontent.com/vandilsonbrito/wiki-suits/main/src/API/characters.json";
+
+        fetch(charactersURL)
+        .then(response => response.json())
+        .then(data => {
+            const character = data.filter((item) => {return item.slug === slug});
+            setCharacter(character[0]);
+
+            if (character) {
+                console.log(character);
+            } else {
+            console.log("Personagem não encontrado");
+            }
+        })
+        .catch(error => console.error("Erro ao obter dados:", error));
     }
 
     useEffect(() => {

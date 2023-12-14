@@ -13,28 +13,47 @@ const cardsVariants = {
 export default function Characters() {
     
     const [characters, setCharacters] = useState([]);
+    const [charactersImages, setCharacterImages] = useState([]);
+    const [imageAddress, setImageAddress] = useState('');
+    const [isAnimationDone, setIsAnimationDone] = useState(false)
     const controls = useAnimation();
     const [ref, inView] = useInView({ threshold: 0.1 });
 
     const getData = async () => {
-        try {
-            const res = await fetch('http://localhost:3001/api/characters/');
-            const data = await res.json();
-            setCharacters(data);
 
-        }
-        catch(e) { console.log(e) }
+        fetch('https://raw.githubusercontent.com/vandilsonbrito/wiki-suits/main/src/API/characters.json')
+        .then(response => response.json())
+        .then(data => {
+            // Faça algo com os dados JSON
+            setCharacters(data);
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Erro ao recuperar o arquivo JSON:', error);
+        });
+    }
+
+    const getImages = async () => {
+        fetch('https://raw.githubusercontent.com/vandilsonbrito/wiki-suits/main/src/API/public/characters/Rachel_Zane.webp')
+        .then(response => response.json())
+        .then(data => {
+            setCharacterImages(data);
+            console.log(data)
+        })
     }
 
     useEffect(() => {
         getData()
+        getImages()
     }, [])
 
     useEffect(() => {
-        if (inView) {
+        console.log(isAnimationDone)
+        if (inView && (!isAnimationDone)) {
           controls.start("visible");
+          setIsAnimationDone(true);
         }
-      }, [controls, inView]);
+      }, [controls, inView, isAnimationDone]);
 
   return (
     <div className="w-full h-full lg:px-28 py-20 lg:py-32 flex flex-col gap-14 text-white " >
@@ -44,16 +63,21 @@ export default function Characters() {
         <div className="w-full h-full min-h-screen flex flex-wrap justify-center gap-20" ref={ref} >
             {
                 characters.map((item, index) => {
+
+                    
+                    const arrayOfNames = item.characterName.split(" ");
+                    console.log(arrayOfNames[0])
+                    console.log(arrayOfNames[1])
       
                     return(
                         <motion.div 
                             key={index}
                             variants={cardsVariants}
                             animate={controls}
-                            initial="hidden"
+                            initial={isAnimationDone? 'visible' : 'hidden'}
                             > 
                             <Link to={`./character/${item.slug}`}  className="w-[110px] h-[90px] text-center mt-2">
-                                <img className='w-[90px] h-[90px] object-cover rounded-xl mx-auto' src={`http://localhost:3001${item.image}`} alt={`${item.characterName} Picture`}/>
+                                <img className='w-[90px] h-[90px] object-cover rounded-xl mx-auto' src={`https://raw.githubusercontent.com/vandilsonbrito/wiki-suits/main/src/API/public/characters/${arrayOfNames[0]}_${arrayOfNames[1]}.webp`} alt={`${item.characterName} Picture`}/>
                                 <p className="text-[.8rem] mt-1">{item.characterName}</p>
                                 <p className="text-[.7rem] mt-1">{item.name}</p>
                             </Link>
