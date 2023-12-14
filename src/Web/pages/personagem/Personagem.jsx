@@ -32,6 +32,9 @@ export default function Personagens() {
         getDataCharacter()
     }, [slug])
 
+    const paragraphs = character?.description?.map((paragraph, index) => (
+        <p key={index}>{paragraph}</p>
+    ));
 
   return (
     <div className="w-full h-full bg-black personagem" >
@@ -46,7 +49,7 @@ export default function Personagens() {
                 <div className="w-full h-full min-h-screen text-white p-7 md:p-20 flex flex-col items-center gap-7">
                     <img className='w-[90px] h-[90px] object-cover rounded-xl mx-auto' src={`https://raw.githubusercontent.com/vandilsonbrito/wiki-suits/main/src/API/public/characters/${(character.characterName)?.replace(' ', '_')}.webp`} alt={`${character.characterName} Picture`}/>
                     <h2 className="text-2xl mb-8">{character.characterName}</h2>
-                    <div dangerouslySetInnerHTML={{ __html: character?.description?.join('') }} />
+                    {paragraphs}
                 </div>
             ) : (
                 <p>Carregando...</p>
