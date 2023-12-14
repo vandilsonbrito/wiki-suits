@@ -10,12 +10,6 @@ export default function Personagens() {
     
 
     const getDataCharacter = async () => {
-        /* try {
-            const res = await fetch(`http://localhost:3001/api/characters/${slug}`);
-            const data = await res.json();
-            setCharacter(data);
-        }
-        catch(e) { console.log(e) } */
         
         const charactersURL = "https://raw.githubusercontent.com/vandilsonbrito/wiki-suits/main/src/API/characters.json";
 
@@ -25,10 +19,8 @@ export default function Personagens() {
             const character = data.filter((item) => {return item.slug === slug});
             setCharacter(character[0]);
 
-            if (character) {
-                console.log(character);
-            } else {
-            console.log("Personagem não encontrado");
+            if (!character) {
+                console.log("Personagem não encontrado");
             }
         })
         .catch(error => console.error("Erro ao obter dados:", error));
@@ -48,9 +40,10 @@ export default function Personagens() {
         exit={{opacity: 0}}
         
         >
+            {console.log((character.characterName)?.replace(' ', '_'))}
             {character ? (
                 <div className="w-full h-full min-h-screen text-white p-7 md:p-20 flex flex-col items-center gap-7">
-                    <img className='w-[180px] h-[180px] object-cover rounded-sm mx-auto' src={`http://localhost:3001${character.image}`} alt={`${character.characterName} Picture`}/>
+                    <img className='w-[90px] h-[90px] object-cover rounded-xl mx-auto' src={`https://raw.githubusercontent.com/vandilsonbrito/wiki-suits/main/src/API/public/characters/${(character.characterName)?.replace(' ', '_')}.webp`} alt={`${character.characterName} Picture`}/>
                     <h2 className="text-2xl mb-8">{character.characterName}</h2>
                     <div dangerouslySetInnerHTML={{ __html: character?.description?.join('') }} />
                 </div>

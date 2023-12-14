@@ -14,7 +14,6 @@ export default function Characters() {
     
     const [characters, setCharacters] = useState([]);
     const [charactersImages, setCharacterImages] = useState([]);
-    const [imageAddress, setImageAddress] = useState('');
     const [isAnimationDone, setIsAnimationDone] = useState(false)
     const controls = useAnimation();
     const [ref, inView] = useInView({ threshold: 0.1 });
@@ -26,25 +25,17 @@ export default function Characters() {
         .then(data => {
             // Faça algo com os dados JSON
             setCharacters(data);
-            console.log(data);
+            setCharacterImages(data.map((character)=> (character.characterName).replace(' ', '_')));
+            console.log(data.map((character)=> (character.characterName).replace(' ', '_')));
         })
         .catch(error => {
             console.error('Erro ao recuperar o arquivo JSON:', error);
         });
     }
 
-    const getImages = async () => {
-        fetch('https://raw.githubusercontent.com/vandilsonbrito/wiki-suits/main/src/API/public/characters/Rachel_Zane.webp')
-        .then(response => response.json())
-        .then(data => {
-            setCharacterImages(data);
-            console.log(data)
-        })
-    }
 
     useEffect(() => {
         getData()
-        getImages()
     }, [])
 
     useEffect(() => {
@@ -65,10 +56,6 @@ export default function Characters() {
                 characters.map((item, index) => {
 
                     
-                    const arrayOfNames = item.characterName.split(" ");
-                    console.log(arrayOfNames[0])
-                    console.log(arrayOfNames[1])
-      
                     return(
                         <motion.div 
                             key={index}
@@ -77,7 +64,7 @@ export default function Characters() {
                             initial={isAnimationDone? 'visible' : 'hidden'}
                             > 
                             <Link to={`./character/${item.slug}`}  className="w-[110px] h-[90px] text-center mt-2">
-                                <img className='w-[90px] h-[90px] object-cover rounded-xl mx-auto' src={`https://raw.githubusercontent.com/vandilsonbrito/wiki-suits/main/src/API/public/characters/${arrayOfNames[0]}_${arrayOfNames[1]}.webp`} alt={`${item.characterName} Picture`}/>
+                                <img className='w-[90px] h-[90px] object-cover rounded-xl mx-auto' src={`https://raw.githubusercontent.com/vandilsonbrito/wiki-suits/main/src/API/public/characters/${charactersImages[index]}.webp`} alt={`${item.characterName} Picture`}/>
                                 <p className="text-[.8rem] mt-1">{item.characterName}</p>
                                 <p className="text-[.7rem] mt-1">{item.name}</p>
                             </Link>
