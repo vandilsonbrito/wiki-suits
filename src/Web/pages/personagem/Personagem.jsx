@@ -7,7 +7,6 @@ export default function Personagens() {
     
     const { slug } = useParams();
     const [character, setCharacter] = useState([]);
-    
 
     const getDataCharacter = async () => {
         

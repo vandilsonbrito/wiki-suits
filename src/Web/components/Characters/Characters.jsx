@@ -14,7 +14,8 @@ export default function Characters() {
     
     const [characters, setCharacters] = useState([]);
     const [charactersImages, setCharacterImages] = useState([]);
-    const [isAnimationDone, setIsAnimationDone] = useState(false)
+    const [isAnimationDone, setIsAnimationDone] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
     const controls = useAnimation();
     const [ref, inView] = useInView({ threshold: 0.1 });
 
@@ -26,7 +27,8 @@ export default function Characters() {
             // Faça algo com os dados JSON
             setCharacters(data);
             setCharacterImages(data.map((character)=> (character.characterName).replace(' ', '_')));
-            console.log(data.map((character)=> (character.characterName).replace(' ', '_')));
+            console.log(data.map((character)=> (character.characterName).replace(' ', '_')))
+            setIsLoaded(true)
         })
         .catch(error => {
             console.error('Erro ao recuperar o arquivo JSON:', error);
@@ -52,26 +54,30 @@ export default function Characters() {
             <h2 className="uppercase text-4xl">Personagens</h2>
         </div>
         <div className="w-full h-full min-h-screen flex flex-wrap justify-center gap-20" ref={ref} >
-            {
-                characters.map((item, index) => {
-
+            {   
+                isLoaded ? (
                     
-                    return(
-                        <motion.div 
-                            key={index}
-                            variants={cardsVariants}
-                            animate={controls}
-                            initial={isAnimationDone? 'visible' : 'hidden'}
-                            > 
-                            <Link to={`./character/${item.slug}`}  className="w-[110px] h-[90px] text-center mt-2">
-                                <img className='w-[90px] h-[90px] object-cover rounded-xl mx-auto' src={`https://raw.githubusercontent.com/vandilsonbrito/wiki-suits/main/src/API/public/characters/${charactersImages[index]}.webp`} alt={`${item.characterName} Picture`}/>
-                                <p className="text-[.8rem] mt-1">{item.characterName}</p>
-                                <p className="text-[.7rem] mt-1">{item.name}</p>
-                            </Link>
-                        </motion.div>
-
+                    characters.map((item, index) => {
+                        return(
+                            <motion.div
+                                key={index}
+                                variants={cardsVariants}
+                                animate={controls}
+                                initial={isAnimationDone? 'visible' : 'hidden'}
+                                >
+                                <Link to={`./character/${item.slug}`}  className="w-[110px] h-[90px] text-center mt-2">
+                                    <img className='w-[90px] h-[90px] object-cover rounded-xl mx-auto' src={`https://raw.githubusercontent.com/vandilsonbrito/wiki-suits/main/src/API/public/characters/${charactersImages[index]}.webp`} alt={`${item.characterName} Picture`}/>
+                                    <p className="text-[.8rem] mt-1">{item.characterName}</p>
+                                    <p className="text-[.7rem] mt-1">{item.name}</p>
+                                </Link>
+                            </motion.div>
+                        )
+                    })
                     )
-                })
+                
+                : (
+                    'Recarregue a Página!'
+                    )
             }
         </div>
     </div>
