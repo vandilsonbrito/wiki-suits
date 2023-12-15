@@ -43,7 +43,7 @@ export default function Personagens() {
                 
                 {character ? (
                     <div className="w-full h-full min-h-screen text-white p-7 md:p-20 flex flex-col items-center gap-7">
-                        <img className='w-[90px] h-[90px] object-cover rounded-xl mx-auto' src={`https://raw.githubusercontent.com/vandilsonbrito/wiki-suits/main/src/API/public/characters/${(character.characterName)?.replace(' ', '_')}.webp`} alt={`${character.characterName} Picture`}/>
+                        <img className='w-[120px] h-[120px] object-cover rounded-xl mx-auto mt-9 md:mt-0' src={`https://raw.githubusercontent.com/vandilsonbrito/wiki-suits/main/src/API/public/characters/${(character.characterName)?.replace(' ', '_')}.webp`} alt={`${character.characterName} Picture`}/>
                         <h2 className="text-2xl mb-8">{character.characterName}</h2>
                         <div dangerouslySetInnerHTML={{ __html: character?.description?.join('') }} />
                     </div>
