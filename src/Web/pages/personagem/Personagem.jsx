@@ -33,7 +33,7 @@ export default function Personagens() {
 
 
     return (
-        <div className="w-full h-full bg-black personagem" >
+        <div className="w-full h-full personagem" >
             <motion.div
             initial={{opacity: 0.5}}
             animate={{opacity: 1}}

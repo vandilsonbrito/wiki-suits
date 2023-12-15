@@ -40,7 +40,7 @@ export default function Home() {
   
   
   return (
-    <div className="w-full h-full bg-black px-8 md:px-20">
+    <div className="w-full h-full px-8 md:px-20">
       {}
       <motion.div
         initial={{ opacity: 0.5 }}
