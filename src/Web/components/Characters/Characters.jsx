@@ -27,7 +27,6 @@ export default function Characters() {
             // Faça algo com os dados JSON
             setCharacters(data);
             setCharacterImages(data.map((character)=> (character.characterName).replace(' ', '_')));
-            console.log(data.map((character)=> (character.characterName).replace(' ', '_')))
             setIsLoaded(true)
         })
         .catch(error => {
@@ -41,7 +40,6 @@ export default function Characters() {
     }, [])
 
     useEffect(() => {
-        console.log(isAnimationDone)
         if (inView && (!isAnimationDone)) {
           controls.start("visible");
           setIsAnimationDone(true);
@@ -76,7 +74,7 @@ export default function Characters() {
                     )
                 
                 : (
-                    'Recarregue a Página!'
+                    <p className='text-lg text-white'>Recarregue a Página!</p>
                     )
             }
         </div>
