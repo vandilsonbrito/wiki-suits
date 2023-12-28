@@ -1,8 +1,18 @@
-# React + Vite
+# Portfolio Vandilson
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+  O Wiki Suits é um wiki para os fãs da série Suits, no qual, os fãs podem ver os principais personagens e ao clicar nos cards dos personagens ver todo um resumo da história e outras curiosidades do personagem. 
 
-Currently, two official plugins are available:
+<h2>Technologies</h2>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+  - React (Hooks)
+  - Tailwindcss
+  - React-Router-Dom
+  
+<h2>Exibition</h2>
+
+https://github.com/vandilsonbrito/wiki-suits/assets/108373095/dab056f1-7f10-43bd-b8e5-6ca1a40620a8
+
+<h2>Demo</h2>
+
+https://wiki-suits.netlify.app/
+
