@@ -5,6 +5,7 @@
 <h2>Technologies</h2>
 
   - React (Hooks)
+  - API Fetch
   - Tailwindcss
   - React-Router-Dom
   
