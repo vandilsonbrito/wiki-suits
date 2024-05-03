@@ -47,11 +47,11 @@ export default function Characters() {
       }, [controls, inView, isAnimationDone]);
 
   return (
-    <div className="w-full h-full lg:px-28 py-20 lg:py-32 flex flex-col gap-14 text-white " >
+    <div className="w-full h-full lg:px-28 py-20 lg:py-32 flex flex-col items-center gap-14 text-white " >
         <div className="w-full h-full flex justify-center">
             <h2 className="uppercase text-4xl">Personagens</h2>
         </div>
-        <div className="w-full h-full min-h-screen flex flex-wrap justify-center gap-20" ref={ref} >
+        <div className="w-full max-w-[1500px] h-full min-h-[400px] flex flex-wrap justify-center gap-20 " ref={ref} >
             {   
                 isLoaded ? (
                     
@@ -62,6 +62,7 @@ export default function Characters() {
                                 variants={cardsVariants}
                                 animate={controls}
                                 initial={isAnimationDone? 'visible' : 'hidden'}
+                                className='w-fit h-fit'
                                 >
                                 <Link to={`./character/${item.slug}`}  className="w-[110px] h-[90px] text-center mt-2">
                                     <img className='w-[90px] h-[90px] object-cover rounded-xl mx-auto' src={`https://raw.githubusercontent.com/vandilsonbrito/wiki-suits/main/src/API/public/characters/${charactersImages[index]}.webp`} alt={`${item.characterName} Picture`}/>
